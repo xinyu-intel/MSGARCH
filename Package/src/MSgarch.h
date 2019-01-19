@@ -619,6 +619,7 @@ inline List MSgarch::f_rnd(const int& n, const NumericVector& theta,
 inline NumericMatrix MSgarch::calc_lndMat(const NumericVector& y) {
   // set up
   int nb_obs = y.size();
+  std::cout << "y.size()" << nb_obs << std::endl;
   NumericMatrix lndMat(K, nb_obs - 1);
   
   // initialize
@@ -630,6 +631,7 @@ inline NumericMatrix MSgarch::calc_lndMat(const NumericVector& y) {
     increment_vol(vol, y[t - 1]);               // increment all volatilities
     lndMat(_, t - 1) = calc_kernel(vol, y[t]);  // calc all kernels
   }
+  std::cout << "MSgarch::calc_lndMat done" << std::endl;
   return lndMat;
 }
 
