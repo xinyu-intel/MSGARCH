@@ -37,6 +37,7 @@ class Normal {
     double y_kt = yi / (sqrt(vol.h));
     double identity = ((y_kt < 0) ? 1 : 0);
     double tao = 0.01;
+    std::cout << "loss = " << abs(tao - identity) * (y_kt * y_kt) * (-1) << std::endl;
     return abs(tao - identity) * (y_kt * y_kt) * (-1);
   }
 
