@@ -284,7 +284,6 @@ inline void MSgarch::loadparam(const NumericVector& theta) {
   for(int i = 0; i < K; i++){
     P0(i) = delta(i);
   }
-  std::cout << "MSgarch::loadparam done" << std::endl;
 }
 
 //------------------------------ Prior calculation
@@ -313,7 +312,6 @@ inline prior MSgarch::calc_prior(const NumericVector& theta) {
   out.r1 = r1_joint;
   out.r2 = ((out.r1) ? r2_joint : -1e10);
   out.r3 = r3_joint;
-  std::cout << "MSgarch::calc_prior done" << std::endl;
   return out;
 }
 
@@ -334,7 +332,6 @@ inline NumericMatrix MSgarch::f_unc_vol(NumericMatrix& all_thetas) {
       ht(j, s) = vol[s].h;
     }
   }
-  std::cout << "MSgarch::f_unc_vol done" << std::endl;
   return ht;
 }
 
@@ -365,7 +362,6 @@ inline arma::cube MSgarch::calc_ht(NumericMatrix& all_thetas,
       }
     }
   }
-  std::cout << "MSgarch::calc_ht done" << std::endl;
   return ht;
 }
 
@@ -403,7 +399,6 @@ inline NumericVector MSgarch::f_pdf(const NumericVector& x,
       out[i] = log(tmp[i]);
     }
   }
-  std::cout << "MSgarch::f_pdf done" << std::endl;
   return out;
 }
 
@@ -440,7 +435,6 @@ inline arma::cube MSgarch::f_pdf_its(const NumericVector& theta,
       s++;
     }
   }
-  std::cout << "MSgarch::fpdf_its done" << std::endl;
   return tmp;
 }
 
@@ -478,7 +472,6 @@ inline NumericVector MSgarch::f_cdf(const NumericVector& x,
       out[i] = log(tmp[i]);
     }
   }
-  std::cout << "MSgarch::f_cdf done" << std::endl;
   return out;
 }
 
@@ -513,7 +506,6 @@ inline arma::cube MSgarch::f_cdf_its(const NumericVector& theta,
       s++;
     }
   }
-  std::cout << "MSgarch::fcdf_its done" << std::endl;
   return tmp;
 }
 
@@ -548,7 +540,6 @@ inline List MSgarch::f_sim(const int& n, const int& m, const NumericVector& thet
       }
     }
   }
-  std::cout << "MSgarch::f_sim done" << std::endl;
   return (List::create(Rcpp::Named("draws") = y, Rcpp::Named("state") = S,  Rcpp::Named("CondVol") = CondVol));
 }
 
@@ -588,7 +579,6 @@ inline List MSgarch::f_simAhead(const NumericVector& y, const int& n, const int&
     }  // new draw
     vol = vol0;
   }
-  std::cout << "MSgarch::f_simAhead done" << std::endl;
   return (List::create(Rcpp::Named("draws") = y_sim, Rcpp::Named("state") = S,  Rcpp::Named("CondVol") = CondVol));
 }
 
@@ -616,7 +606,6 @@ inline List MSgarch::f_rnd(const int& n, const NumericVector& theta,
   }
   NumericVector yy(draw.begin(), draw.end());
   NumericVector SS(S.begin(), S.end());
-  std::cout << "MSgarch::f_rnd done" << std::endl;
   return (
       Rcpp::List::create(Rcpp::Named("draws") = yy, Rcpp::Named("state") = SS));
 }
@@ -626,7 +615,6 @@ inline List MSgarch::f_rnd(const int& n, const NumericVector& theta,
 inline NumericMatrix MSgarch::calc_lndMat(const NumericVector& y) {
   // set up
   int nb_obs = y.size();
-  std::cout << "y.size()" << nb_obs << std::endl;
   NumericMatrix lndMat(K, nb_obs - 1);
   
   // initialize
@@ -638,7 +626,6 @@ inline NumericMatrix MSgarch::calc_lndMat(const NumericVector& y) {
     increment_vol(vol, y[t - 1]);               // increment all volatilities
     lndMat(_, t - 1) = calc_kernel(vol, y[t]);  // calc all kernels
   }
-  std::cout << "MSgarch::calc_lndMat done" << std::endl;
   return lndMat;
 }
 
