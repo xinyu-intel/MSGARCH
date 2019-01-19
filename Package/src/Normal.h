@@ -40,7 +40,7 @@ class Normal {
     double tao = 0.01;
     std::cout << "identity is " << identity << std::endl;
     std::cout << "loss = " << fabs(tao - identity) * pow(yi, 2) / vol.h * (-1) << std::endl;
-    return fabs(tao - identity) * pow(yi, 2) / vol.h * (-1);
+    return lncst - 0.5 * pow(yi, 2) / vol.h - 0.5 * vol.lnh;
   }
 
   // returns PDF evaluated at "x"
