@@ -36,12 +36,11 @@ class Normal {
     // return lncst - 0.5 * pow(yi, 2) / vol.h - 0.5 * vol.lnh;
     std::cout << "vol.h is " << vol.h << " yi is " << yi << std::endl;
     std::cout << "MLE = " << lncst - 0.5 * pow(yi, 2) / vol.h - 0.5 * vol.lnh << std::endl;
-    double y_kt = yi / (sqrt(vol.h));
-    double identity = ((y_kt < 0) ? 1 : 0);
+    double identity = ((yi < 0) ? 1 : 0);
     double tao = 0.01;
-    std::cout << "y_kt is " << y_kt << " identity is " << identity << std::endl;
-    std::cout << "loss = " << fabs(tao - identity) * (y_kt * y_kt) * (-1) << std::endl;
-    return fabs(tao - identity) * (y_kt * y_kt) * (-1);
+    std::cout << "identity is " << identity << std::endl;
+    std::cout << "loss = " << fabs(tao - identity) * pow(yi, 2) / vol.h * (-1) << std::endl;
+    return fabs(tao - identity) * pow(yi, 2) / vol.h * (-1);
   }
 
   // returns PDF evaluated at "x"
